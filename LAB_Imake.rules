@@ -1054,10 +1054,9 @@ distclean::								@@\
 #define KeepUpToDateCopy(file,src,dest)					@@\
 all:: $(addprefix $(addprefix dest,/), file)				@@\
 	if [ -f $(addprefix $(addprefix src,/), file) ] && [ -d dest ]; then \		@@\
-	   if cmp -s  $(addprefix $(addprefix src,/), file) $(addprefix $(addprefix dest,/a), file); then \@@\
-		echo "Source and destination for file do not differ -- not updated!" ; \	@@\
-   	   else	\							@@\
-		$(INSTALL)  $(INSTBINFLAGS) $(addprefix $(addprefix src,/), file) dest ; \		@@\
+	   if ! cmp -s  $(addprefix $(addprefix src,/), file) $(addprefix $(addprefix dest,/), file); then \@@\
+		($(INSTALL)  $(INSTBINFLAGS) $(addprefix $(addprefix src,/), file) dest ; \		@@\
+		echo file " was updated!") ; \			    	@@\
 	   fi;	\							@@\
 	else \								@@\
   	   echo "Warning: Cannot keep "file" update to date in "dest; \		@@\
