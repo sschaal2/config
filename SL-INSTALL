@@ -54,6 +54,7 @@ if ( `uname -a | grep -c ipipe` > 0 ) then \
 endif \
 \
 alias imake           "imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE" \
+set path=(./$MACHTYPE $PROG_ROOT/bin/$MACHTYPE $LAB_ROOT/bin/$MACHTYPE . $path) \
 ' >> SL-CONFIG
 
 else 
