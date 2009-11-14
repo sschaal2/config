@@ -1,0 +1,66 @@
+#!/bin/tcsh
+# SL-INSTALL prepares any of the CLMC-Lab software directories. After
+# the first git-download of an CLMC-Lab software repository, SL-INSTALL 
+# needs to be called once from the root of the software directory to
+# initialize everything. 
+
+# if SL-INSTALL is called from the config/ directory, it will generate
+# the SL-CONFIG file, which should be source by the user's .cshrc 
+# to setup the SL environment variables for SL.
+
+# detect whether we are in config/
+if ( `pwd | grep -c /config` > 0 ) then
+    
+    echo "Path to SL core software ["`pwd | sed s_/config__`"]: "
+    set LAB_ROOT = $<
+    if ( $LAB_ROOT == "" ) then
+       set LAB_ROOT=`pwd | sed s_/config__`
+    endif
+
+    echo "Path to SL user software ["`pwd | sed s_/config__`"]: "
+    echo "Maybe "`pwd | sed s_/config__`" ?"
+    set PROG_ROOT = $<
+    if ( $PROG_ROOT == "" ) then
+       set PROG_ROOT=`pwd | sed s_/config__`
+    endif
+
+    mkdir $LAB_ROOT/lib
+    mkdir $LAB_ROOT/include
+    mkdir $PROG_ROOT/lib
+    mkdir $PROG_ROOT/include
+
+
+    /bin/rm -f SL-CONFIG
+    echo "setenv LAB_ROOT "$LAB_ROOT > SL-CONFIG
+    echo "setenv PROG_ROOT "$PROG_ROOT >> SL-CONFIG
+
+    echo ' \
+if ( $MACHTYPE == "i386" && `uname -a | grep -c Darwin` > 0 ) then \
+   setenv MACHTYPE i386mac \
+endif \
+\
+if ( $MACHTYPE == "x86_64" && `uname -a | grep -c Darwin` > 0 ) then \
+   setenv MACHTYPE x86_64mac \
+endif \
+\
+if ( `uname -a | grep -c ipipe` > 0 ) then \
+   setenv MACHTYPE $MACHTYPE"xeno" \
+endif \
+\
+alias imake           "imake -I$LAB_ROOT/imake -TLAB_Imake.tmpl -D$MACHTYPE" \
+' >> SL-CONFIG
+
+else 
+
+   imake -I$LAB_ROOT/imake -TLAB_Imake.tmpl -D$MACHTYPE
+   cd src
+   imake -I$LAB_ROOT/imake -TLAB_Imake.tmpl -D$MACHTYPE
+   cd ..
+
+   make -s -j depend
+   make -s -j clean
+   make -s -j all
+   make -s -j install
+
+endif
+
