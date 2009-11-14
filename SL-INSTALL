@@ -23,11 +23,18 @@ if ( `pwd | grep -c /config` > 0 ) then
        set PROG_ROOT=`pwd | sed s_/config__`
     endif
 
-    mkdir $LAB_ROOT/lib
-    mkdir $LAB_ROOT/include
-    mkdir $PROG_ROOT/lib
-    mkdir $PROG_ROOT/include
-
+    if ( ! -d $LAB_ROOT/lib ) then
+       mkdir $LAB_ROOT/lib
+    endif 
+    if ( ! -d $LAB_ROOT/lib ) then
+       mkdir $LAB_ROOT/include
+    endif 
+    if ( ! -d $LAB_ROOT/lib ) then
+        mkdir $PROG_ROOT/lib
+    endif 
+    if ( ! -d $LAB_ROOT/lib ) then
+        mkdir $PROG_ROOT/include
+    endif 
 
     /bin/rm -f SL-CONFIG
     echo "setenv LAB_ROOT "$LAB_ROOT > SL-CONFIG
