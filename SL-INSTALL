@@ -18,7 +18,6 @@ if ( `pwd | grep -c /config` > 0 ) then
     endif
 
     echo "Path to SL user software ["`pwd | sed s_/config__`"]: "
-    echo "Maybe "`pwd | sed s_/config__`" ?"
     set PROG_ROOT = $<
     if ( $PROG_ROOT == "" ) then
        set PROG_ROOT=`pwd | sed s_/config__`
