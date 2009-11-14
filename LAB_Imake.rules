@@ -1231,10 +1231,10 @@ name::									@@\
 		       if [ -f ../makefiles/imakefile.xeno ]; then \	@@\
 		         ln -s ../makefiles/imakefile.xeno Imakefile;\	@@\
 		       else \  				   		@@\
-		         ln -s ../makefiles/imakefile.unix Imakefile;\	@@\
+		         ln -s "../makefiles/imakefile.unix" Imakefile;\@@\
 		       fi; \   				   		@@\
 		     else \  				 		@@\
-		       ln -s ../makefiles/imakefile.unix Imakefile;\	@@\
+		       ln -s "../makefiles/imakefile.unix" Imakefile;\	@@\
 		     fi; \   				 		@@\
 		     $(IMAKE_CMD) imakeflags );\			@@\
 		  else \						@@\
