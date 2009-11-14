@@ -1227,7 +1227,7 @@ name::									@@\
 		     ( $(MKDIR) $$i; \					@@\
 		     echo "Created " $$i; \    				@@\
 		     cd $$i;            \				@@\
-		     if [ `uname -a | grep -c ipipe` ]; then \		@@\
+		     if [ `uname -a | grep -c ipipe` == 1 ]; then \	@@\
 		       if [ -f ../makefiles/imakefile.xeno ]; then \	@@\
 		         ln -s ../makefiles/imakefile.xeno Imakefile;\	@@\
 		       else \  				   		@@\
