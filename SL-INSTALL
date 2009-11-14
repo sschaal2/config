@@ -53,14 +53,14 @@ if ( `uname -a | grep -c ipipe` > 0 ) then \
    setenv MACHTYPE $MACHTYPE"xeno" \
 endif \
 \
-alias imake           "imake -I$LAB_ROOT/imake -TLAB_Imake.tmpl -D$MACHTYPE" \
+alias imake           "imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE" \
 ' >> SL-CONFIG
 
 else 
 
-   imake -I$LAB_ROOT/imake -TLAB_Imake.tmpl -D$MACHTYPE
+   imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE
    cd src
-   imake -I$LAB_ROOT/imake -TLAB_Imake.tmpl -D$MACHTYPE
+   imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE
    cd ..
 
    make -s -j depend
