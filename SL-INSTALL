@@ -57,6 +57,15 @@ alias imake           "imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE" \
 set path=(./$MACHTYPE $PROG_ROOT/bin/$MACHTYPE $LAB_ROOT/bin/$MACHTYPE . $path) \
 ' >> SL-CONFIG
 
+    echo "*************************************************************************"
+    echo "IMPORTANT: before installing any other SL software, excuted:"
+    echo "           unix> source SL-CONFIG"
+    echo "           to finalize the setup of your environment variables"
+    echo "ADD THE LINE:"
+    echo "           source ~"`pwd | sed s.$HOME.$USER.`"/SL-CONFIG"
+    echo "to your ~/.cshrc file to keep the SL environment initialized."
+    echo "*************************************************************************"
+
 else 
 
    imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE
