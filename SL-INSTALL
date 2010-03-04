@@ -49,7 +49,7 @@ if ( $MACHTYPE == "x86_64" && `uname -a | grep -c Darwin` > 0 ) then \
    setenv MACHTYPE x86_64mac \
 endif \
 \
-if ( `uname -a | grep -c ipipe` > 0 ) then \
+if ( `uname -a | grep -c ipipe` && `echo $MACHTYPE | grep -cv xeno` > 0 ) then \
    setenv MACHTYPE $MACHTYPE"xeno" \
 endif \
 \
