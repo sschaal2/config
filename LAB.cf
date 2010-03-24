@@ -167,3 +167,8 @@ LDOGHOST        =  argus
 
 /* path to xenomai root directory */
 XENOMAI_ROOT    = /usr/xenomai
+
+/* which computers can run the Sarcos robots */
+SARCOS_MASTER_HOST = xenomai
+SARCOS_SLAVE_HOST  = xenomai
+SARCOS_PRIMUS_HOST = xenomai
