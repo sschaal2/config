@@ -544,13 +544,13 @@
 
 #ifndef OpenGLLibraries
 #ifdef powerpc
-#define OpenGLLibraries -L/opt/local/lib -L/sw/lib -lglut -lGL -lGLU -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+#define OpenGLLibraries -L/opt/local/lib -L/sw/lib -lglut -lGL -lGLU -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib -lX11
 #else
 #ifdef i386mac
-#define OpenGLLibraries -L/opt/local/lib -L/sw/lib -lglut -lGL -lGLU -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+#define OpenGLLibraries -L/opt/local/lib -L/sw/lib -lglut -lGL -lGLU -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib -lX11
 #else
 #ifdef x86_64mac
-#define OpenGLLibraries -L/opt/local/lib -L/sw/lib -lglut -lGL -lGLU -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+#define OpenGLLibraries -L/opt/local/lib -L/sw/lib -lglut -lGL -lGLU -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib -lX11
 #else
 #define OpenGLLibraries -lglut -lGL -lGLU -lX11 -lXmu
 #endif
