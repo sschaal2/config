@@ -98,6 +98,9 @@
 #ifdef i486xeno
 #define SysIncludeDirs   $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=posix --cflags)
 #endif
+#ifdef x86_64xeno
+#define SysIncludeDirs   $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=posix --cflags)
+#endif
 #ifndef SysIncludeDirs
 #define SysIncludeDirs
 #endif
@@ -122,6 +125,9 @@
 #ifdef x86_64
 #define SysLdFlags       -L/usr/X11/lib64 -L/usr/X11/lib
 #endif
+#ifdef x86_64xeno
+#define SysLdFlags       -L/usr/X11/lib64 -L/usr/X11/lib
+#endif
 #ifndef SysLdFlags
 #define SysLdFlags       -L/opt/local/lib -L/sw/lib -L/usr/X11/lib
 #endif
@@ -142,6 +148,9 @@
 #endif
 #ifdef i486xeno
 #define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=posix --ldflags) -lnative -lrtdk -lanalogy -lrtdm -lreadline -lcurses
+#endif
+#ifdef x86_64xeno
+#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=posix --ldflags) -lnative -lrtdk -lrtdm -lreadline -lcurses
 #endif
 #ifndef SysLibraries
 #define SysLibraries     -lpthread -lrt -lreadline -lcurses
@@ -369,6 +378,9 @@
 #ifdef x86_64
 #define MatlabCcFlags -DMATLAB_MEX_FILE -fPIC -D_GNU_SOURCE -pthread
 #endif
+#ifdef x86_64xeno
+#define MatlabCcFlags -DMATLAB_MEX_FILE -fPIC -D_GNU_SOURCE -pthread
+#endif
 #ifdef sparc
 #define MatlabCcFlags -DMATLAB_MEX_FILE -fPIC
 #endif
@@ -397,6 +409,9 @@
 #define CommLibraries -lnsl
 #endif
 #ifdef x86_64
+#define CommLibraries -lnsl
+#endif
+#ifdef x86_64xeno
 #define CommLibraries -lnsl
 #endif
 #ifdef sparc
@@ -651,6 +666,9 @@
 #endif
 #ifdef i486xeno
   NORMAL_CC_FLAGS = NormalCcFlags -mtune=native
+#endif
+#ifdef x86_64xeno
+  NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native
 #endif
 
 
