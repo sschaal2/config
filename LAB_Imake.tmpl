@@ -84,16 +84,16 @@
 
 #ifndef SysIncludeDirs
 #ifdef powerpc
-#define SysIncludeDirs   -I/sw/include -I/opt/local/include -I/usr/include -I/usr/X11/include 
+#define SysIncludeDirs   -I/usr/X11/include -I/opt/local/include -I/sw/include -I/usr/include 
 #endif
 #ifdef i586
 #define SysIncludeDirs   -I/usr/include
 #endif
 #ifdef i386mac
-#define SysIncludeDirs   -I/sw/include -I/opt/local/include -I/usr/include -I/usr/X11/include 
+#define SysIncludeDirs   -I/usr/X11/include -I/opt/local/include -I/sw/include -I/usr/include 
 #endif
 #ifdef x86_64mac
-#define SysIncludeDirs   -I/sw/include -I/opt/local/include -I/usr/include -I/usr/X11/include 
+#define SysIncludeDirs   -I/usr/X11/include -I/opt/local/include -I/sw/include -I/usr/include 
 #endif
 #ifdef i486xeno
 /* #define SysIncludeDirs   $(shell $(XENOMAI_ROOT)/bin/xeno-config --posix-cflags) */
@@ -130,7 +130,7 @@
 #define SysLdFlags       -L/usr/X11/lib64 -L/usr/X11/lib
 #endif
 #ifndef SysLdFlags
-#define SysLdFlags       -L/opt/local/lib -L/sw/lib -L/usr/X11/lib
+#define SysLdFlags       -L/sw/lib -L/usr/X11/lib -L/opt/local/lib 
 #endif
 #endif
 
@@ -564,10 +564,10 @@
 #define OpenGLLibraries -L/opt/local/lib -L/sw/lib -lglut -lGL -lGLU -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib -lX11
 #else
 #ifdef i386mac
-#define OpenGLLibraries -L/opt/local/lib -L/sw/lib -lglut -lGL -lGLU -lX11
+#define OpenGLLibraries -lglut -lGL -lGLU -lX11
 #else
 #ifdef x86_64mac
-#define OpenGLLibraries -L/opt/local/lib -L/sw/lib -lglut -lGL -lGLU -lX11
+#define OpenGLLibraries -lglut -lGL -lGLU -lX11
 #else
 #define OpenGLLibraries -lglut -lGL -lGLU -lX11 -lXmu
 #endif
