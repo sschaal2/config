@@ -73,7 +73,6 @@ else
    imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE
    cd ..
 
-   make -s -j depend
    make -s -j clean
    make -s -j all
    make -s -j install
