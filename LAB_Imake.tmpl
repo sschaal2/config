@@ -662,7 +662,7 @@
   NORMAL_CC_FLAGS = NormalCcFlags
 #endif
 #ifdef i386mac
-  NORMAL_CC_FLAGS = NormalCcFlags  -march=native -mtune=native
+  NORMAL_CC_FLAGS = NormalCcFlags  -march=native -msse3
 #endif
 #ifdef x86_64
   NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native
