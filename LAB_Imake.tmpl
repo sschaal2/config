@@ -187,6 +187,10 @@
 #define CcCmd gcc
 #endif
 
+#ifndef CcppCmd
+#define CcppCmd g++
+#endif
+
 #ifndef PPCArCmd
 #define PPCArCmd arppc -r
 #endif
@@ -595,12 +599,16 @@
 #define DependDefines /* As nothing */
 #endif
 
+#ifndef GCCDependDefines
+#define GCCDependDefines -MD -MP -MF $*.d 
+#endif
+
 
 /*
  *  Other defines for general use.
  */
 
-#define FilesToClean *.CKP *.ln *.BAK *.bak *.o core errs ,* *~ *.a .emacs_* tags TAGS make.log MakeOut *.68k *.ppc *.x40 *.map
+#define FilesToClean \( -name "*.CKP" -or -name "*.ln" -or -name "*.BAK" -or -name "*.bak" -or -name "*.o" -or -name "*.d" -or -name "core" -or -name "errs" -or -name ",*" -or -name "*~" -or -name "*.a" -or -name ".emacs_*" -or -name "TAGS" -or -name "make.log" -or -name "MakeOut" -or -name "*.68k" -or -name "*.ppc" -or -name "*.x40" -or -name "*.map" \)
 
 
 /******************************************************************************
@@ -613,6 +621,7 @@
             IMAKE = ImakeCmd
                AR = ArCmd
                CC = CcCmd
+             CCPP = CcppCmd
             C40AR = C40ArCmd
             C40CC = C40CcCmd
              VXAR = VXArCmd
@@ -650,24 +659,24 @@
      INSTDOCFLAGS = InstDocFlags
   RANLIBINSTFLAGS = RanlibInstFlags
 
-  NORMAL_CC_FLAGS = NormalCcFlags -mcpu=$(MACHTYPE)
+  NORMAL_CC_FLAGS = NormalCcFlags -march=native -mtune=native
 #ifdef sparc
   NORMAL_CC_FLAGS = NormalCcFlags
 #endif
 #ifdef i386mac
-  NORMAL_CC_FLAGS = NormalCcFlags -mtune=generic
+  NORMAL_CC_FLAGS = NormalCcFlags  -march=native -msse3
 #endif
 #ifdef x86_64
-  NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native -msse3
+  NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native
 #endif
 #ifdef i486
-  NORMAL_CC_FLAGS = NormalCcFlags -mtune=$(MACHTYPE)
+  NORMAL_CC_FLAGS = NormalCcFlags -march=native -mtune=native
 #endif
 #ifdef x86_64mac
   NORMAL_CC_FLAGS = NormalCcFlags -m64 -mtune=native -msse3
 #endif
 #ifdef i486xeno
-  NORMAL_CC_FLAGS = NormalCcFlags -mtune=native
+  NORMAL_CC_FLAGS = NormalCcFlags -march=native -mtune=native
 #endif
 #ifdef x86_64xeno
   NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native
@@ -737,11 +746,11 @@ DIRECTORY_DEFINES = DirectoryDefines
 			$(SYS_LIBRARIES)
         CPP_FLAGS = $(ALLDEFINES)
     DEPENDDEFINES = DependDefines
+ GCCDEPENDDEFINES = GCCDependDefines
 
         IMAKE_CMD = $(IMAKE) -I$(PROJ_IMAKEDIR)  \
 			$(IMAKE_DEFINES) $(DIRECTORY_DEFINES)
-       CLEANFILES = 
-           RM_CMD = $(RM) FilesToClean $(CLEANFILES)
+           RM_CMD = find . FilesToClean -exec rm {} \;
 
 
 /*
@@ -778,12 +787,11 @@ emptyrule::
 
 CleanTarget()
 MakefileTarget()
-TagsTarget()
 
 header::
 	@echo "Distribution of headers complete in `pwd`."
 
-DependTarget()
+/* DependTarget() */
 
 
 #ifdef IHaveSubdirs
@@ -792,14 +800,14 @@ DependTarget()
 /**/XCOMM
 
 InstallSubdirs($(SUBDIRS))
-InstallManSubdirs($(SUBDIRS))
+/*InstallManSubdirs($(SUBDIRS))*/
 /*InstallDocSubdirs($(SUBDIRS))*/
 DocSubdirs($(SUBDIRS))
 CleanSubdirs($(SUBDIRS))
 DistcleanSubdirs($(SUBDIRS))
-TagsSubdirs($(SUBDIRS))
+/*TagsSubdirs($(SUBDIRS))*/
 MakefileSubdirs($(SUBDIRS))
-DependSubdirs($(SUBDIRS))
+/* DependSubdirs($(SUBDIRS))*/
 MakeSubdirs($(SUBDIRS))
 HeaderSubdirs($(SUBDIRS))
 
