@@ -388,15 +388,19 @@ clean::									@@\
  */
 
 /*
- *  CleanTarget - generate rules to remove any garbage files; the #* is here
- *  instead of in the definition of RM_CMD because System V will treat the 
- *  pound sign in the RM_CMD variable as a comment.
+ *  CleanTarget - generate rules to remove any garbage files
  */
 
 #ifndef CleanTarget
 #define	CleanTarget()							@@\
 clean::									@@\
-	$(RM_CMD) 							@@
+	if [ $(notdir $(PWD)) == $(MACHTYPE) ]; then \			@@\
+	   $(RM_CMD); \		   	    	       	       	  	@@\
+	elif [ $(notdir $(PWD)) == "src" ]; then \			@@\
+	   $(RM_CMD); \		   	    	       	       	  	@@\
+	else \								@@\
+	   $(RM) FilesToClean; \					@@\
+	fi    								@@
 #endif /* CleanTarget */
 
 
