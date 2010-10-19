@@ -394,9 +394,9 @@ clean::									@@\
 #ifndef CleanTarget
 #define	CleanTarget()							@@\
 clean::									@@\
-	if [ $(notdir $(PWD)) == $(MACHTYPE) ]; then \			@@\
+	if [ $(notdir $(PWD)) = $(MACHTYPE) ]; then \			@@\
 	   $(RM_CMD); \		   	    	       	       	  	@@\
-	elif [ $(notdir $(PWD)) == "src" ]; then \			@@\
+	elif [ $(notdir $(PWD)) = "src" ]; then \			@@\
 	   $(RM_CMD); \		   	    	       	       	  	@@\
 	else \								@@\
 	   $(RM) FilesToClean; \					@@\
