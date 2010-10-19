@@ -608,7 +608,9 @@
  *  Other defines for general use.
  */
 
-#define FilesToClean \( -name "*.CKP" -or -name "*.ln" -or -name "*.BAK" -or -name "*.bak" -or -name "*.o" -or -name "*.d" -or -name "core" -or -name "errs" -or -name ",*" -or -name "*~" -or -name "*.a" -or -name ".emacs_*" -or -name "TAGS" -or -name "make.log" -or -name "MakeOut" -or -name "*.68k" -or -name "*.ppc" -or -name "*.x40" -or -name "*.map" \)
+#define FilesToCleanFind \( -name "*.CKP" -or -name "*.ln" -or -name "*.BAK" -or -name "*.bak" -or -name "*.o" -or -name "*.d" -or -name "core" -or -name "errs" -or -name ",*" -or -name "*~" -or -name "*.a" -or -name ".emacs_*" -or -name "TAGS" -or -name "make.log" -or -name "MakeOut" -or -name "*.68k" -or -name "*.ppc" -or -name "*.x40" -or -name "*.map" \)
+
+#define FilesToClean *.CKP *.ln *.BAK *.bak *.o core errs ,* *~ *.a .emacs_* TAGS make.log MakeOut *.68k *.ppc *.x40 *.map
 
 
 /******************************************************************************
@@ -748,9 +750,8 @@ DIRECTORY_DEFINES = DirectoryDefines
     DEPENDDEFINES = DependDefines
  GCCDEPENDDEFINES = GCCDependDefines
 
-        IMAKE_CMD = $(IMAKE) -I$(PROJ_IMAKEDIR)  \
-			$(IMAKE_DEFINES) $(DIRECTORY_DEFINES)
-           RM_CMD = find . FilesToClean -exec rm {} \;
+        IMAKE_CMD = $(IMAKE) -I$(PROJ_IMAKEDIR) $(IMAKE_DEFINES) $(DIRECTORY_DEFINES)
+           RM_CMD = find . FilesToCleanFind -exec rm {} \;
 
 
 /*
