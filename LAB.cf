@@ -108,6 +108,21 @@ I486XENO = i486xeno
 #undef MACHFLAG
 #endif
 
+/* x86_64xeno */
+#if x86_64xeno
+#define MACHFLAG
+#undef x86_64xeno
+#undef x86_64
+#endif
+
+X86_64XENO = x86_64xeno
+
+#ifdef MACHFLAG
+#define x86_64xeno 1
+#define __XENO__
+#undef MACHFLAG
+#endif
+
 
 
 /* declaration of all variables and important directories */
