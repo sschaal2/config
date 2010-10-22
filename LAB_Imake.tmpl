@@ -115,10 +115,6 @@
 #endif
 #endif
 
-#ifndef SysManDir
-#define SysManDir        /usr/man
-#endif
-
 #ifndef SysLdFlags
 #ifdef i486xeno
 #define SysLdFlags       -L/usr/X11/lib
@@ -148,7 +144,6 @@
 #define SysLibraries    -lreadline -lcurses
 #endif
 #ifdef i486xeno
-/* #define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --posix-ldflags) -lnative -lrtdk -lreadline -lcurses */
 #define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=posix --ldflags) -lnative -lrtdk -lanalogy -lrtdm -lreadline -lcurses
 #endif
 #ifdef x86_64xeno
@@ -157,10 +152,6 @@
 #ifndef SysLibraries
 #define SysLibraries     -lpthread -lrt -lreadline -lcurses
 #endif
-#endif
-
-#ifndef DevDir
-#define DevDir /projects
 #endif
 
 /*
@@ -173,10 +164,6 @@
 
 #ifndef ImakeCmd
 #define ImakeCmd imake -D$(MACHTYPE)
-#endif
-
-#ifndef ImakeDefines
-#define ImakeDefines
 #endif
 
 #ifndef ArCmd
@@ -725,7 +712,7 @@ OPTIMIZE_CC_FLAGS = OptimizeCcFlags
 
       LAB_DEFINES = LabDefines
      PROJ_DEFINES = ProjDefines
-    IMAKE_DEFINES = -TLAB_Imake.tmpl ImakeDefines
+    IMAKE_DEFINES = -TLAB_Imake.tmpl
 DIRECTORY_DEFINES = DirectoryDefines
 
     PROJ_IMAKEDIR = $(LAB_ROOT)/config

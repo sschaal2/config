@@ -124,16 +124,24 @@ $(addsuffix .o, files): %.o: $(SRCDIR)/%.c				@@\
  */
 
 #ifndef NormalObjRule
-#define NormalObjRule( files )                                          @@\
+#define NormalObjRule( files )  NormalObjRuleCflags( files, )
+#endif /* NormalObjRule */
+
+/*
+ *  NormalObjRuleCflags - Rule for normal files targeted as objects with extra CFLAGS
+ */
+
+#ifndef NormalObjRuleCflags
+#define NormalObjRuleCflags( files, cflags )                            @@\
 $(sort files): %.o: $(SRCDIR)/%.c                                       @@\
 	$(RM) $@                                                        @@\
 	$(info * $*.c)							@@\
 	mkdir -p $(dir $*.c)						@@\
-	$(CC) $(GCCDEPENDDEFINES) -o $*.o -c $(ALLINCLUDES) $(CFLAGS) $(NORMAL_CC_FLAGS) $(PROFILING) $(SRCDIR)/$*.c @@\
+	$(CC) $(GCCDEPENDDEFINES) -o $*.o -c $(ALLINCLUDES) $(CFLAGS) $(NORMAL_CC_FLAGS) cflags $(PROFILING) $(SRCDIR)/$*.c @@\
 	      			     	     		    	      	@@\
 -include $(addsuffix .d, $(basename files))				@@\
 									@@
-#endif /* NormalObjRule */
+#endif /* NormalObjRuleCflags */
 
 
 /*
@@ -141,16 +149,41 @@ $(sort files): %.o: $(SRCDIR)/%.c                                       @@\
  */
 
 #ifndef NormalObjRuleCpp
-#define	NormalObjRuleCpp( files )      					@@\
+#define	NormalObjRuleCpp( files ) NormalObjRuleCppCflags( files,)
+#endif /* NormalObjRuleCpp */
+
+/*
+ *  NormalObjRuleCppCflags - Rule for normal files targeted as objects with extra CFLAGS
+ */
+
+#ifndef NormalObjRuleCppCflags
+#define	NormalObjRuleCppCflags( files,cflags )				@@\
 $(sort files): %.o: $(SRCDIR)/%.cpp                                     @@\
 	$(RM) $@                                                        @@\
 	$(info * $*.cpp)						@@\
 	mkdir -p $(dir $*.cpp)						@@\
-	$(CCPP) $(GCCDEPENDDEFINES) -o $*.o -Wall -Wredundant-decls -c $(ALLINCLUDES) $(CFLAGS) $(NORMAL_CC_FLAGS) $(PROFILING) $(SRCDIR)/$*.cpp @@\
+	$(CCPP) $(GCCDEPENDDEFINES) -o $*.o -Wall -Wredundant-decls -c $(ALLINCLUDES) $(CFLAGS) $(NORMAL_CC_FLAGS) cflags $(PROFILING) $(SRCDIR)/$*.cpp @@\
 	      			     	     		    	      	@@\
 -include $(addsuffix .d, $(basename files))				@@\
 									@@
-#endif /* NormalObjRuleCpp */
+#endif /* NormalObjRuleCppCflags */
+
+/*
+ *  NormalObjRuleCppRos - Rule for normal files targeted as objects for ROS
+ */
+
+#ifndef NormalObjRuleCppRos
+#define	NormalObjRuleCppRos( files, ros_packages)			@@\
+$(sort files): %.o: $(SRCDIR)/%.cpp                                     @@\
+	$(RM) $@                                                        @@\
+	$(info * $*.cpp)						@@\
+	mkdir -p $(dir $*.cpp)						@@\
+	$(CCPP) $(GCCDEPENDDEFINES) -o $*.o -Wall -Wredundant-decls -c $(ALLINCLUDES) $(CFLAGS) $(NORMAL_CC_FLAGS) $(addprefix -I, $(shell for i in ros_packages ; do rospack cflags-only-I $$i; done)) $(PROFILING) $(SRCDIR)/$*.cpp @@\
+	      			     	     		    	      	@@\
+-include $(addsuffix .d, $(basename files))				@@\
+									@@
+#endif /* NormalObjRuleCppRos */
+
 
 /*
  *  NormalCPPObjRule - just for compatibitly 
@@ -235,6 +268,26 @@ InstallProgram(program,$(BINDIR))					@@\
 clean::									@@\
 	$(RM) program							@@
 #endif /* ProgramListTargetCpp */
+
+
+/*
+ * ProgramListTargetCppRos - same as ProgramListTargetCpp, for ROS
+ */
+
+#ifndef ProgramListTargetCppRos
+#define	ProgramListTargetCppRos(program,list,extralibs,ros_packages)	@@\
+									@@\
+AllTarget(program)							@@\
+									@@\
+program: list    							@@\
+	RemoveTargetProgram($@)						@@\
+	$(CCPP) -o $@ list $(ALLLDFLAGS) extralibs $(addprefix -L, $(shell for i in $(ROS_PACKAGES); do rospack libs-only-L $$i; done)) $(addprefix -l, $(shell for i in $(ROS_PACKAGES); do rospack libs-only-l $$i; done)) $(shell for i in $(ROS_PACKAGES); do rospack libs-only-other $$i; done) $(ALLLIBRARIES) 	  @@\
+									@@\
+InstallProgram(program,$(BINDIR))					@@\
+									@@\
+clean::									@@\
+	$(RM) program							@@
+#endif /* ProgramListTargetCppRos */
 
 /*
  * CPPProgramListTarget - compatiblity definition
