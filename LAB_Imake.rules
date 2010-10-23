@@ -184,6 +184,22 @@ $(sort files): %.o: $(SRCDIR)/%.cpp                                     @@\
 									@@
 #endif /* NormalObjRuleCppRos */
 
+/*
+ *  NormalObjRuleRos - Rule for normal files targeted as objects for ROS
+ */
+
+#ifndef NormalObjRuleRos
+#define	NormalObjRuleRos( files, ros_packages)			@@\
+$(sort files): %.o: $(SRCDIR)/%.c                                     @@\
+	$(RM) $@                                                        @@\
+	$(info * $*.c)						@@\
+	mkdir -p $(dir $*.c)						@@\
+	$(CC) $(GCCDEPENDDEFINES) -o $*.o -Wall -Wredundant-decls -c $(ALLINCLUDES) $(CFLAGS) $(NORMAL_CC_FLAGS) $(addprefix -I, $(shell for i in ros_packages ; do rospack cflags-only-I $$i; done)) $(PROFILING) $(SRCDIR)/$*.c @@\
+	      			     	     		    	      	@@\
+-include $(addsuffix .d, $(basename files))				@@\
+									@@
+#endif /* NormalObjRuleRos */
+
 
 /*
  *  NormalCPPObjRule - just for compatibitly 
