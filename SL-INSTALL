@@ -57,13 +57,46 @@ alias imake           "imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE" \
 set path=(./$MACHTYPE $PROG_ROOT/bin/$MACHTYPE $LAB_ROOT/bin/$MACHTYPE . $path) \
 ' >> SL-CONFIG
 
+    /bin/rm -f SL-CONFIG.sh
+    echo "export LAB_ROOT="$LAB_ROOT > SL-CONFIG.sh
+    echo "export PROG_ROOT="$PROG_ROOT >> SL-CONFIG.sh
+
+    echo ' \
+export HOST=`hostname` \
+\
+# Remove everything following the "-" in the MACHTYPE \
+export MACHTYPE=$(echo $MACHTYPE | sed '\''s/-.*//'\'') \
+\
+# Append mac to the MACHTYPE if needed \
+if uname -s | grep Darwin &>/dev/null && [ $MACHTYPE == '\''i386'\'' -o $MACHTYPE == '\''x86_64'\'' ] \
+then \
+    export MACHTYPE="$MACHTYPE"mac \
+fi \
+\
+# Append xeno to the MACHTYPE if needed (and prevent duplicates) \
+if uname -r | grep ipipe &>/dev/null && echo $MACHTYPE | grep -v xeno &>/dev/null \
+then \
+    export MACHTYPE="$MACHTYPE"xeno \
+fi \
+\
+alias imake='\''imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE'\'' \
+export PATH=./$MACHTYPE:$PROG_ROOT/bin/$MACHTYPE:$LAB_ROOT/bin/$MACHTYPE:.:$PATH \
+' >> SL-CONFIG.sh
+
+
     echo "*************************************************************************"
-    echo "IMPORTANT: before installing any other SL software, excuted:"
+    echo "IMPORTANT: before installing any other SL software, execute:"
     echo "           unix> source SL-CONFIG"
     echo "           to finalize the setup of your environment variables"
     echo "ADD THE LINE:"
     echo "           source ~"`pwd | sed s.$HOME.$USER.`"/SL-CONFIG"
     echo "to your ~/.cshrc file to keep the SL environment initialized."
+    echo "*************************************************************************"
+    echo "If you use bash instead of tcsh, you should run the following now:"
+    echo "           bash$ source SL-CONFIG.sh"
+    echo "ADD THE LINE:"
+    echo "           source ~"`pwd | sed s.$HOME.$USER.`"/SL-CONFIG.sh"
+    echo "to your ~/.bashrc file to keep the SL environment initialized."
     echo "*************************************************************************"
 
 else 
