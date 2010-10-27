@@ -26,13 +26,13 @@ if ( `pwd | grep -c /config` > 0 ) then
     if ( ! -d $LAB_ROOT/lib ) then
        mkdir $LAB_ROOT/lib
     endif 
-    if ( ! -d $LAB_ROOT/lib ) then
+    if ( ! -d $LAB_ROOT/include ) then
        mkdir $LAB_ROOT/include
     endif 
-    if ( ! -d $LAB_ROOT/lib ) then
+    if ( ! -d $PROG_ROOT/lib ) then
         mkdir $PROG_ROOT/lib
     endif 
-    if ( ! -d $LAB_ROOT/lib ) then
+    if ( ! -d $PROG_ROOT/include ) then
         mkdir $PROG_ROOT/include
     endif 
 
@@ -80,6 +80,7 @@ then \
 fi \
 \
 alias imake='\''imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE'\'' \
+alias sl_make='\''imake; cd src; imake; cd ..; make -s -j clean; make -s -j all; make -s -j install'\'' \
 export PATH=./$MACHTYPE:$PROG_ROOT/bin/$MACHTYPE:$LAB_ROOT/bin/$MACHTYPE:.:$PATH \
 ' >> SL-CONFIG.sh
 
