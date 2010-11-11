@@ -97,10 +97,10 @@
 #endif
 #ifdef i486xeno
 /* #define SysIncludeDirs   $(shell $(XENOMAI_ROOT)/bin/xeno-config --posix-cflags) */
-#define SysIncludeDirs   $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=posix --cflags)
+#define SysIncludeDirs   $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --cflags)
 #endif
 #ifdef x86_64xeno
-#define SysIncludeDirs   $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=posix --cflags)
+#define SysIncludeDirs   $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --cflags)
 #endif
 #ifndef SysIncludeDirs
 #define SysIncludeDirs
@@ -144,10 +144,10 @@
 #define SysLibraries    -lreadline -lcurses
 #endif
 #ifdef i486xeno
-#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=posix --ldflags) -lnative -lrtdk -lanalogy -lrtdm -lreadline -lcurses
+#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --ldflags) -lnative -lrtdk -lanalogy -lrtdm -lreadline -lcurses
 #endif
 #ifdef x86_64xeno
-#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=posix --ldflags) -lnative -lrtdk -lrtdm -lreadline -lcurses
+#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --ldflags) -lnative -lrtdk -lrtdm -lreadline -lcurses
 #endif
 #ifndef SysLibraries
 #define SysLibraries     -lpthread -lrt -lreadline -lcurses
