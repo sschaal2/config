@@ -8,17 +8,31 @@
 # the SL-CONFIG file, which should be source by the user's .cshrc 
 # to setup the SL environment variables for SL.
 
+# detect command line argument:
+set SL_INSTALL_DEFAULT = 0
+if ($#argv > 0 && "x$1" == "x-default") then
+  set SL_INSTALL_DEFAULT = 1
+endif
+
 # detect whether we are in config/
 if ( `pwd | grep -c /config` > 0 ) then
     
-    echo "Path to SL core software ["`pwd | sed s_/config__`"]: "
-    set LAB_ROOT = $<
+    if ($SL_INSTALL_DEFAULT == 0) then
+      echo "Path to SL core software ["`pwd | sed s_/config__`"]: "
+      set LAB_ROOT = $<
+    else
+      set LAB_ROOT = ""
+    endif
     if ( $LAB_ROOT == "" ) then
        set LAB_ROOT=`pwd | sed s_/config__`
     endif
 
-    echo "Path to SL user software ["`pwd | sed s_/config__`"]: "
-    set PROG_ROOT = $<
+    if ($SL_INSTALL_DEFAULT == 0) then
+      echo "Path to SL user software ["`pwd | sed s_/config__`"]: "
+      set PROG_ROOT = $<
+    else
+      set PROG_ROOT = ""
+    endif
     if ( $PROG_ROOT == "" ) then
        set PROG_ROOT=`pwd | sed s_/config__`
     endif
