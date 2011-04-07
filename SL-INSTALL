@@ -122,7 +122,6 @@ else
    cd ..
 
    make -s -j clean
-   make -s -j all
    make -s -j install
 
 endif
