@@ -147,7 +147,7 @@
 #define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --ldflags) -lnative -lrtdk -lanalogy -lrtdm -lreadline -lcurses
 #endif
 #ifdef x86_64xeno
-#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --ldflags) -lnative -lrtdk -lrtdm -lreadline -lcurses
+#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --ldflags) -lnative -lrtdk -lanalogy -lrtdm -lreadline -lcurses
 #endif
 #ifndef SysLibraries
 #define SysLibraries     -lpthread -lrt -lreadline -lcurses
@@ -348,13 +348,13 @@
 #define OptimizeCcFlags -O3  -mfpmath=sse -ffast-math -fprefetch-loop-arrays -funit-at-a-time
 #endif
 #ifdef x86_64
-#define OptimizeCcFlags -O3  -mfpmath=sse -ffast-math -fprefetch-loop-arrays -funit-at-a-time -fomit-frame-pointer
+#define OptimizeCcFlags -O3  -mfpmath=sse -ffast-math -fprefetch-loop-arrays -funit-at-a-time -fomit-frame-pointer -fPIC
 #endif
 #ifdef powerpc
 #define OptimizeCcFlags -O3  -funit-at-a-time
 #endif
 #ifdef x86_64mac
-#define OptimizeCcFlags -O3  -mfpmath=sse -ffast-math -fprefetch-loop-arrays -funit-at-a-time
+#define OptimizeCcFlags -O3  -mfpmath=sse -ffast-math -fprefetch-loop-arrays -funit-at-a-time -fPIC
 #endif
 #ifndef OptimizeCcFlags
 #define OptimizeCcFlags -O3  -ffast-math -funit-at-a-time
@@ -656,19 +656,19 @@
   NORMAL_CC_FLAGS = NormalCcFlags  -march=native -msse3
 #endif
 #ifdef x86_64
-  NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native
+  NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native -fPIC
 #endif
 #ifdef i486
   NORMAL_CC_FLAGS = NormalCcFlags -march=native -mtune=native
 #endif
 #ifdef x86_64mac
-  NORMAL_CC_FLAGS = NormalCcFlags -m64 -mtune=native -msse3
+  NORMAL_CC_FLAGS = NormalCcFlags -m64 -mtune=native -msse3 -fPIC
 #endif
 #ifdef i486xeno
   NORMAL_CC_FLAGS = NormalCcFlags -march=native -mtune=native
 #endif
 #ifdef x86_64xeno
-  NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native
+  NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native -fPIC
 #endif
 
 
