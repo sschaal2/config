@@ -732,10 +732,12 @@ distclean::								@@\
 #ifndef BuildMakefileTarget
 #define	BuildMakefileTarget(imakefile,imakeflags)			@@\
 									@@\
-Makefile:: imakefile $(PROJ_IMAKEDIR)/LAB.cf $(LAB_IMAKEDIR)/LAB_Imake.tmpl $(LAB_IMAKEDIR)/LAB_Imake.rules @@\
+Makefile:: Imakefile $(LAB_IMAKEDIR)/LAB.cf $(LAB_IMAKEDIR)/LAB_Imake.tmpl $(LAB_IMAKEDIR)/LAB_Imake.rules @@\
 	-@if [ -f Makefile ]; then \					@@\
 		$(RM) Makefile.bak; $(MV) Makefile Makefile.bak; \	@@\
-	else exit 0; fi							@@\
+	else \	      		    	  	   		 	@@\
+	exit 0; \		    	  	   		 	@@\
+	fi	     							@@\
 	$(IMAKE_CMD) imakeflags						@@\
 	@echo "Makefile in `pwd` has been updated."			@@
 #endif /* BuildMakefileTarget */
