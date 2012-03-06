@@ -328,7 +328,7 @@
 #endif
 
 #ifndef NormalCcFlags
-#define NormalCcFlags  -D$(MACHTYPE) -D$(LAB) -DUNIX -Wall -Wno-unused -Wno-strict-aliasing -Wno-write-strings -fnested-functions
+#define NormalCcFlags  -D$(MACHTYPE) -D$(LAB) -DUNIX -Wall -Wno-unused -Wno-strict-aliasing -Wno-write-strings
 #endif
 
 #ifndef AnsiCcFlags
@@ -653,7 +653,7 @@
   NORMAL_CC_FLAGS = NormalCcFlags
 #endif
 #ifdef i386mac
-  NORMAL_CC_FLAGS = NormalCcFlags  -march=native -msse3
+  NORMAL_CC_FLAGS = NormalCcFlags -fnested-functions -march=native -msse3
 #endif
 #ifdef x86_64
   NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native -fPIC
@@ -662,7 +662,7 @@
   NORMAL_CC_FLAGS = NormalCcFlags -march=native -mtune=native
 #endif
 #ifdef x86_64mac
-  NORMAL_CC_FLAGS = NormalCcFlags -m64 -mtune=native -msse3 -fPIC
+  NORMAL_CC_FLAGS = NormalCcFlags  -fnested-functions -m64 -mtune=native -msse3 -fPIC
 #endif
 #ifdef i486xeno
   NORMAL_CC_FLAGS = NormalCcFlags -march=native -mtune=native
