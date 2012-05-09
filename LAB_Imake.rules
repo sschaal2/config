@@ -297,7 +297,7 @@ AllTarget(program)							@@\
 									@@\
 program: list    							@@\
 	RemoveTargetProgram($@)						@@\
-	$(CCPP) -o $@ list $(ALLLDFLAGS) extralibs $(addprefix -L, $(shell for i in $(ROS_PACKAGES); do rospack libs-only-L $$i; done)) $(addprefix -l, $(shell for i in $(ROS_PACKAGES); do rospack libs-only-l $$i; done)) $(shell for i in $(ROS_PACKAGES); do rospack libs-only-other $$i; done) $(ALLLIBRARIES) 	  @@\
+	$(CCPP) -o $@ list $(ALLLDFLAGS) extralibs $(addprefix -L, $(shell for i in ros_packages; do rospack libs-only-L $$i; done)) $(addprefix -l, $(shell for i in ros_packages; do rospack libs-only-l $$i; done)) $(shell for i in ros_packages; do rospack libs-only-other $$i; done) $(ALLLIBRARIES) 	  @@\
 									@@\
 InstallProgram(program,$(BINDIR))					@@\
 									@@\
