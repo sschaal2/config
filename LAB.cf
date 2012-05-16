@@ -191,3 +191,5 @@ SARCOS_PRIMUS_HOST = xenomai
 /* which computers can run the ARM robot */
 ARM_HOST = mandy
 
+/*which computers can run Hermes */
+HERMES_HOST = hermes
