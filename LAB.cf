@@ -196,3 +196,6 @@ HERMES_HOST = hermes
 
 /*which computers can run lbr4 */
 LBR4_HOST = pechstein
+
+/*which computers can run apollo */
+APOLLO_HOST = pechstein
