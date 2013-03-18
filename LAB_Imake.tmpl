@@ -132,25 +132,25 @@
 
 #ifndef SysLibraries
 #ifdef sparc
-#define SysLibraries     -lpthread -LPOSIX4 -lrt -lreadline -lcurses
+#define SysLibraries     -lpthread -LPOSIX4 -lrt -ledit -lcurses
 #endif
 #ifdef i386mac
-#define SysLibraries    -lreadline -lcurses
+#define SysLibraries    -ledit -lcurses
 #endif
 #ifdef powerpc
-#define SysLibraries     -lpthread -lreadline -lcurses
+#define SysLibraries     -lpthread -ledit -lcurses
 #endif
 #ifdef x86_64mac
-#define SysLibraries    -lreadline -lcurses
+#define SysLibraries    -ledit -lcurses
 #endif
 #ifdef i486xeno
-#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --ldflags) -lnative -lrtdk -lanalogy -lrtdm -lreadline -lcurses
+#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --ldflags) -lnative -lrtdk -lanalogy -lrtdm -ledit -lcurses
 #endif
 #ifdef x86_64xeno
-#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --ldflags) -lnative -lrtdk -lanalogy -lrtdm -lreadline -lcurses
+#define SysLibraries    $(shell $(XENOMAI_ROOT)/bin/xeno-config --skin=native --ldflags) -lnative -lrtdk -lanalogy -lrtdm -ledit -lcurses
 #endif
 #ifndef SysLibraries
-#define SysLibraries     -lpthread -lrt -lreadline -lcurses
+#define SysLibraries     -lpthread -lrt -ledit -lcurses
 #endif
 #endif
 
