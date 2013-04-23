@@ -668,7 +668,7 @@
   NORMAL_CC_FLAGS = NormalCcFlags -march=native -mtune=native
 #endif
 #ifdef x86_64xeno
-  NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native -fPIC
+  NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mno-avx -mtune=native -fPIC
 #endif
 
 
