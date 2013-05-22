@@ -194,6 +194,10 @@ ARM_HOST = mandy
 /*which computers can run Hermes */
 HERMES_HOST = hermes
 
-/* which computer can run the LBR4 */
-LBR4_HOST = chagall
+/*which computers can run lbr4 */
+LBR4_HOST = pechstein
+
+/*which computers can run apollo */
+APOLLO_HOST = pechstein
+
 
