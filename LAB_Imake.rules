@@ -162,7 +162,7 @@ $(sort files): %.o: $(SRCDIR)/%.cpp                                     @@\
 	$(RM) $@                                                        @@\
 	$(info * $*.cpp)						@@\
 	mkdir -p $(dir $*.cpp)						@@\
-	$(CCPP) $(GCCDEPENDDEFINES) -o $*.o -Wall -Wredundant-decls -c $(ALLINCLUDES) $(CFLAGS) $(NORMAL_CC_FLAGS) cflags $(PROFILING) $(SRCDIR)/$*.cpp @@\
+	$(CCPP) $(GCCDEPENDDEFINES) -o $*.o -Wall -Wredundant-decls -c $(ALLINCLUDES) $(CFLAGS) $(NORMAL_CCPP_FLAGS) cflags $(PROFILING) $(SRCDIR)/$*.cpp @@\
 	      			     	     		    	      	@@\
 -include $(addsuffix .d, $(basename files))				@@\
 									@@
@@ -178,7 +178,7 @@ $(sort files): %.o: $(SRCDIR)/%.cpp                                     @@\
 	$(RM) $@                                                        @@\
 	$(info * $*.cpp)						@@\
 	mkdir -p $(dir $*.cpp)						@@\
-	$(CCPP) $(GCCDEPENDDEFINES) -o $*.o -Wall -Wredundant-decls -c $(ALLINCLUDES) $(CFLAGS) $(NORMAL_CC_FLAGS) $(addprefix -I, $(shell for i in ros_packages ; do rospack cflags-only-I $$i; done)) $(PROFILING) $(SRCDIR)/$*.cpp @@\
+	$(CCPP) $(GCCDEPENDDEFINES) -o $*.o -Wall -Wredundant-decls -c $(ALLINCLUDES) $(CFLAGS) $(NORMAL_CCPP_FLAGS) $(addprefix -I, $(shell for i in ros_packages ; do rospack cflags-only-I $$i; done)) $(PROFILING) $(SRCDIR)/$*.cpp @@\
 	      			     	     		    	      	@@\
 -include $(addsuffix .d, $(basename files))				@@\
 									@@
