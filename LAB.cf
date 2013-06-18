@@ -186,7 +186,7 @@ XENOMAI_ROOT    = /usr/xenomai
 /* which computers can run the Sarcos robots */
 SARCOS_MASTER_HOST = xenomai
 SARCOS_SLAVE_HOST  = xenomai
-SARCOS_PRIMUS_HOST = xenomai
+SARCOS_PRIMUS_HOST = pechstein
 
 /* which computers can run the ARM robot */
 ARM_HOST = mandy
