@@ -679,8 +679,8 @@
   NORMAL_CCPP_FLAGS = NormalCcppFlags -march=native -mtune=native
 #endif
 #ifdef x86_64xeno
-  NORMAL_CC_FLAGS = NormalCcFlags -m64 -march=native -mtune=native -fPIC
-  NORMAL_CCPP_FLAGS = NormalCcppFlags -m64 -march=native -mtune=native -fPIC
+  NORMAL_CC_FLAGS = NormalCcFlags -fPIC -mtune=native -m64
+  NORMAL_CCPP_FLAGS = NormalCcppFlags -fPIC -mtune=native -m64
 #endif
 
 
