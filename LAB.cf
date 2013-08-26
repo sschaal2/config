@@ -192,7 +192,7 @@ SARCOS_PRIMUS_HOST = xenomai
 ARM_HOST = mandy
 
 /*which computers can run Hermes */
-HERMES_HOST = hermes
+HERMES_HOST = athena
 
 /*which computers can run lbr4 */
 LBR4_HOST = pechstein
