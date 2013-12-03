@@ -16,6 +16,11 @@
 
 cmake_minimum_required(VERSION 2.8)
 
+# we use gcc and g++ as compiler
+
+set(CMAKE_C_COMPILER gcc)
+set(CMAKE_CXX_COMPILER g++)
+
 #############################################################################
 # which lab are we compiling for
 set(LAB CLMC)
@@ -31,10 +36,9 @@ set(MYLIBDIR ${MY_LIBDIR})
 
 set(DOCUMENTATIONDIR doc)
 
-set(LAB_BINDIR $ENV{LAB_ROOT}/bin)
+set(LAB_BINDIR $ENV{LAB_ROOT}/bin/$ENV{MACHTYPE})
 set(LAB_INCLUDES $ENV{LAB_ROOT}/include)
 set(LAB_LIBDIR $ENV{LAB_ROOT}/lib/$ENV{MACHTYPE})
-
 
 #############################################################################
 # set useful variables according to MACHTYPE environment variables
@@ -45,7 +49,7 @@ add_definitions(-DUNIX)
 add_definitions(-D${LAB})
 add_definitions(-D$ENV{MACHTYPE})
 
-set(CMAKE_C_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing" ${CMAKE_C_FLAGS})
+set(CMAKE_C_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing -fnested-functions" ${CMAKE_C_FLAGS})
 set(CMAKE_CPP_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing" ${CMAKE_CPP_FLAGS})
 
 # architecture specific
@@ -118,3 +122,10 @@ endforeach()
 
 add_custom_target(clean-all COMMAND 
 			    ${CMAKE_COMMAND} -P $ENV{LAB_ROOT}/config/cmake/clean-all.cmake)
+
+
+set(DOXYGEN_CMD doxygen)
+set(DOXYGEN_DIR ../doc)
+
+add_custom_target(doc COMMAND ${DOXYGEN_CMD} ${DOXYGEN_DIR}/Doxyfile) 
+

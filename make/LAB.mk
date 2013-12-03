@@ -18,6 +18,7 @@ MAKE      = make
 MKDIR     = mkdir
 
 all::
+doc::
 %:: 
 	@case '${MFLAGS}' in *[ik]*) set +e; esac; \
 	for i in $(SUBDIRS) ; \
