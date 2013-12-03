@@ -24,17 +24,14 @@ doc::
 	for i in $(SUBDIRS) ; \
 	do \
 		 if [ ! -d $$i ]; then \
-		     ( $(MKDIR) $$i; \
+		     $(MKDIR) $$i; \
 		     echo "Created " $$i; \
-		     cd $$i;            \
-		     $(CMAKE_CMD) ../src );\
-		  else \
-		     cd $$i;\
 		  fi; \
+		  cd $$i; \
 		  if [ ! -f "CMakeCache.txt" ]; then \
-		     ( $(CMAKE_CMD) ../src ); \
+		     $(CMAKE_CMD) ../src; \
 		  fi; \
 		  echo "Make $@ in `pwd` begun..."; \
-		   $(MAKE) $(MFLAGS) $@; \
+		  $(MAKE) $(MFLAGS) $@; \
 	done
 
