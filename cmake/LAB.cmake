@@ -49,7 +49,7 @@ add_definitions(-DUNIX)
 add_definitions(-D${LAB})
 add_definitions(-D$ENV{MACHTYPE})
 
-set(CMAKE_C_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing -fnested-functions" ${CMAKE_C_FLAGS})
+set(CMAKE_C_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing" ${CMAKE_C_FLAGS})
 set(CMAKE_CPP_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing" ${CMAKE_CPP_FLAGS})
 
 # architecture specific
@@ -60,13 +60,14 @@ if ($ENV{MACHTYPE} MATCHES "x86_64mac")
   include_directories(/usr/X11/include /opt/local/include /sw/include /usr/include)
   link_directories(/sw/lib /usr/X11/lib /opt/local/lib /usr/lib ${CMAKE_LIBRARY_PATH})
   set(LAB_STD_LIBS readline curses glut GL GLU X11)
+  set(CMAKE_C_FLAGS "-fnested-functions" ${CMAKE_C_FLAGS})
 
 else ($ENV{MACHTYPE} MATCHES "x86_64")
 
   message("Detected MACHTYPE=x86_64")
   include_directories()
   link_directories(/usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
-  set(LAB_STD_LIBS pthread rt readline curses nsl glut GL GLU X11 Xmu)
+  set(LAB_STD_LIBS pthread rt readline curses nsl glut GL GLU X11 Xmu m)
 
 else ($ENV{MACHTYPE} MATCHES "x86_64xeno")
 
