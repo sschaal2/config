@@ -54,7 +54,7 @@ set(CMAKE_CPP_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing ${CMAKE_CPP_FLAGS}")
 
 # architecture specific
 
-if ($ENV{MACHTYPE} MATCHES "x86_64mac")
+if ($ENV{MACHTYPE} STREQUAL "x86_64mac")
 
   message("Detected MACHTYPE=x86_64mac")
   include_directories(/usr/X11/include /opt/local/include /sw/include /usr/include)
@@ -62,14 +62,7 @@ if ($ENV{MACHTYPE} MATCHES "x86_64mac")
   set(LAB_STD_LIBS readline curses glut GL GLU X11)
   set(CMAKE_C_FLAGS "-fnested-functions ${CMAKE_C_FLAGS}")
 
-else ($ENV{MACHTYPE} MATCHES "x86_64")
-
-  message("Detected MACHTYPE=x86_64")
-  include_directories()
-  link_directories(/usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
-  set(LAB_STD_LIBS pthread rt readline curses nsl glut GL GLU X11 Xmu m)
-
-else ($ENV{MACHTYPE} MATCHES "x86_64xeno")
+elseif ($ENV{MACHTYPE} STREQUAL "x86_64xeno" )
 
   set(XENOMAI_ROOT /usr/xenomai)
 
@@ -81,6 +74,13 @@ else ($ENV{MACHTYPE} MATCHES "x86_64xeno")
   include_directories(${XENOMAI_C_FLAGS})
   link_directories(/usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
   set(LAB_STD_LIBS native rtdk analogy rtdm readline curses nsl glut GL GLU X11 Xmu)
+
+else ($ENV{MACHTYPE} STREQUAL "x86_64")
+
+  message("Detected MACHTYPE=x86_64")
+  include_directories()
+  link_directories(/usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
+  set(LAB_STD_LIBS pthread rt readline curses nsl glut GL GLU X11 Xmu m)
 
 endif()
 
