@@ -59,8 +59,8 @@ if ($ENV{MACHTYPE} STREQUAL "x86_64mac")
   message("Detected MACHTYPE=x86_64mac")
   include_directories(/usr/X11/include /opt/local/include /sw/include /usr/include)
   link_directories(/sw/lib /usr/X11/lib /opt/local/lib /usr/lib ${CMAKE_LIBRARY_PATH})
-  set(LAB_STD_LIBS readline curses glut GL GLU X11)
-  set(CMAKE_C_FLAGS "-fnested-functions ${CMAKE_C_FLAGS}")
+  set(LAB_STD_LIBS readline curses glut GL GLU X11 m)
+  set(CMAKE_C_FLAGS "-fnested-functions" ${CMAKE_C_FLAGS})
 
 elseif ($ENV{MACHTYPE} STREQUAL "x86_64xeno" )
 
@@ -73,7 +73,7 @@ elseif ($ENV{MACHTYPE} STREQUAL "x86_64xeno" )
   						  OUTPUT_VARIABLE XENOMAI_LD_FLAGS)  
   include_directories(${XENOMAI_C_FLAGS})
   link_directories(/usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
-  set(LAB_STD_LIBS native rtdk analogy rtdm readline curses nsl glut GL GLU X11 Xmu)
+  set(LAB_STD_LIBS native rtdk analogy rtdm readline curses nsl glut GL GLU X11 Xmu m)
 
 else ($ENV{MACHTYPE} STREQUAL "x86_64")
 
