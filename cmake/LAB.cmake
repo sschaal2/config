@@ -60,7 +60,7 @@ if ($ENV{MACHTYPE} STREQUAL "x86_64mac")
   include_directories(/usr/X11/include /opt/local/include /sw/include /usr/include)
   link_directories(/sw/lib /usr/X11/lib /opt/local/lib /usr/lib ${CMAKE_LIBRARY_PATH})
   set(LAB_STD_LIBS readline curses glut GL GLU X11 m)
-  set(CMAKE_C_FLAGS "-fnested-functions" ${CMAKE_C_FLAGS})
+  set(CMAKE_C_FLAGS "-fnested-functions ${CMAKE_C_FLAGS}")
 
 elseif ($ENV{MACHTYPE} STREQUAL "x86_64xeno" )
 
