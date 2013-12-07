@@ -49,8 +49,8 @@ add_definitions(-DUNIX)
 add_definitions(-D${LAB})
 add_definitions(-D$ENV{MACHTYPE})
 
-set(CMAKE_C_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing" ${CMAKE_C_FLAGS})
-set(CMAKE_CPP_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing" ${CMAKE_CPP_FLAGS})
+set(CMAKE_C_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing ${CMAKE_C_FLAGS}")
+set(CMAKE_CPP_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing ${CMAKE_CPP_FLAGS}")
 
 # architecture specific
 
@@ -64,16 +64,20 @@ if ($ENV{MACHTYPE} STREQUAL "x86_64mac")
 
 elseif ($ENV{MACHTYPE} STREQUAL "x86_64xeno" )
 
+  message("Detected MACHTYPE=x86_64xeno")
+
   set(XENOMAI_ROOT /usr/xenomai)
 
-  message("Detected MACHTYPE=x86_64xeno")
-  exec_program($ENV(XENOMAI_ROOT)/bin/xeno-config --skin=native --cflags 
+  exec_program(${XENOMAI_ROOT}/bin/xeno-config ARGS "--skin=native --cflags" 
   						  OUTPUT_VARIABLE XENOMAI_C_FLAGS)  
-  exec_program($ENV(XENOMAI_ROOT)/bin/xeno-config --skin=native --ldflags 
+  exec_program(${XENOMAI_ROOT}/bin/xeno-config ARGS "--skin=native --ldflags" 
   						  OUTPUT_VARIABLE XENOMAI_LD_FLAGS)  
-  include_directories(${XENOMAI_C_FLAGS})
-  link_directories(/usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
-  set(LAB_STD_LIBS native rtdk analogy rtdm readline curses nsl glut GL GLU X11 Xmu m)
+  set(CMAKE_C_FLAGS "${XENOMAI_C_FLAGS} ${CMAKE_C_FLAGS}")
+  set(CMAKE_CPP_FLAGS "${XENOMAI_C_FLAGS} ${CMAKE_CPP_FLAGS}")
+  set(LAB_STD_LIBS native xenomai pthread rtdk analogy rtdm readline curses nsl glut GL GLU X11 Xmu m)
+
+  include_directories(${XENOMAI_ROOT}/include)
+  link_directories(${XENOMAI_ROOT}/lib /usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
 
 else ($ENV{MACHTYPE} STREQUAL "x86_64")
 
@@ -105,6 +109,8 @@ set(SARCOS_PRIMUS_HOST xenomai)
 set(_variableNames 
 		   CMAKE_C_FLAGS 
 		   CMAKE_CPP_FLAGS 
+		   CMAKE_INCLUDE_PATH
+		   CMAKE_LIBRARY_PATH
 		   LAB_STD_LIBS
 		   LAB_LIBDIR
 		   MY_LIBDIR
