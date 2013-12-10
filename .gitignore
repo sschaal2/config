@@ -14,6 +14,7 @@ powerpc
 obj
 doc/html
 doc/latex
+parm_est
 
 .last_data
 .parameter_pool_vars
