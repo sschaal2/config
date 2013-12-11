@@ -23,8 +23,14 @@ set(CMAKE_CXX_COMPILER g++)
 
 #############################################################################
 # which lab are we compiling for
-set(LAB CLMC)
-#set(LAB AMD)
+
+exec_program(hostname ARGS "-f" OUTPUT_VARIABLE HOST_NAME)
+
+if(${HOST_NAME} MATCHES "usc")
+  set(LAB CLMC)
+else ()
+  set(LAB AMD)
+endif()
 
 set(MY_BINDIR $ENV{PROG_ROOT}/bin)
 set(MY_INCLUDES $ENV{PROG_ROOT}/include)
@@ -99,7 +105,11 @@ set(ARM_HOST mandy)
 set(APOLLO_HOST pechstein)
 set(LBR4_HOST pechstein)
 set(HERMES_HOST hermes)
-set(PHANTOM_HOST rodin)
+if (${LAB}} STREQUAL "clmc")
+  set(PHANTOM_HOST rodin)
+else ()
+  set(PHANTOM_HOST bleyl)
+endif()
 set(SARCOS_MASTER_HOST xenomai)
 set(SARCOS_SLAVE_HOST xenomai)
 set(SARCOS_PRIMUS_HOST xenomai)
@@ -108,6 +118,7 @@ set(SARCOS_PRIMUS_HOST xenomai)
 # print out all variables that we care about
 
 set(_variableNames 
+		   LAB
 		   CMAKE_C_FLAGS 
 		   CMAKE_CPP_FLAGS 
 		   CMAKE_INCLUDE_PATH
