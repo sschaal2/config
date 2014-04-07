@@ -68,6 +68,13 @@ if ($ENV{MACHTYPE} STREQUAL "x86_64mac")
   set(LAB_STD_LIBS edit curses glut GL GLU X11 m)
   set(CMAKE_C_FLAGS "-fnested-functions ${CMAKE_C_FLAGS}")
 
+# check for problematic compiler flags
+  include(CheckCCompilerFlag)
+  check_c_compiler_flag(-fnested-functions FLAG_NESTED_FUNCTIONS)
+  if (FLAG_NESTED_FUNCTIONS)
+    set(CMAKE_C_FLAGS "-fnested-functions ${CMAKE_C_FLAGS}")
+  endif()
+
 elseif ($ENV{MACHTYPE} STREQUAL "x86_64xeno" )
 
   message("Detected MACHTYPE=x86_64xeno")
