@@ -63,8 +63,8 @@ set(CMAKE_CPP_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing ${CMAKE_CPP_FLAGS}")
 if ($ENV{MACHTYPE} STREQUAL "x86_64mac")
 
   message("Detected MACHTYPE=x86_64mac")
-  include_directories(BEFORE /usr/X11/include /opt/local/include /sw/include /usr/include)
-  link_directories(/sw/lib /usr/X11/lib /opt/local/lib /usr/lib ${CMAKE_LIBRARY_PATH})
+  include_directories(BEFORE /opt/local/include /sw/include /usr/X11/include /usr/include)
+  link_directories(/opt/local/lib /sw/lib /usr/X11/lib /usr/lib ${CMAKE_LIBRARY_PATH})
   set(LAB_STD_LIBS edit curses glut GL GLU X11 m)
 
 # check for problematic compiler flags
