@@ -55,16 +55,16 @@ add_definitions(-DUNIX)
 add_definitions(-D${LAB})
 add_definitions(-D$ENV{MACHTYPE})
 
-set(CMAKE_C_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing ${CMAKE_C_FLAGS}")
-set(CMAKE_CPP_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing ${CMAKE_CPP_FLAGS}")
+set(CMAKE_C_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing -Wno-deprecated-declarations ${CMAKE_C_FLAGS}")
+set(CMAKE_CPP_FLAGS "-Wall -Wno-unused -Wno-strict-aliasing -Wno-deprecated-declarations ${CMAKE_CPP_FLAGS}")
 
 # architecture specific
 
 if ($ENV{MACHTYPE} STREQUAL "x86_64mac")
 
   message("Detected MACHTYPE=x86_64mac")
-  include_directories(BEFORE /opt/local/include /sw/include /usr/X11/include /usr/include)
-  link_directories(/opt/local/lib /sw/lib /usr/X11/lib /usr/lib ${CMAKE_LIBRARY_PATH})
+  include_directories(BEFORE /opt/local/include /opt/X11/include /usr/include)
+  link_directories(/opt/local/lib /opt/X11/lib /usr/lib ${CMAKE_LIBRARY_PATH})
   set(LAB_STD_LIBS edit curses glut GL GLU X11 m)
 
 # check for problematic compiler flags
