@@ -82,7 +82,7 @@ elseif ($ENV{MACHTYPE} STREQUAL "x86_64xeno" )
   						  OUTPUT_VARIABLE XENOMAI_LD_FLAGS)  
   set(CMAKE_C_FLAGS "${XENOMAI_C_FLAGS} ${CMAKE_C_FLAGS}")
   set(CMAKE_CPP_FLAGS "${XENOMAI_C_FLAGS} ${CMAKE_CPP_FLAGS}")
-  set(LAB_STD_LIBS native xenomai pthread rtdk analogy rtdm edit curses nsl glut GL GLU X11 Xmu m)
+  set(LAB_STD_LIBS native xenomai pthread rtdk analogy rtdm edit curses nsl glut GL GLU X11 Xmu m std++)
 
   link_directories(${XENOMAI_ROOT}/lib /usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
   include_directories(BEFORE ${XENOMAI_C_FLAGS})
@@ -92,7 +92,7 @@ else ($ENV{MACHTYPE} STREQUAL "x86_64")
   message("Detected MACHTYPE=x86_64")
   include_directories()
   link_directories(/usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
-  set(LAB_STD_LIBS pthread rt edit curses nsl glut GL GLU X11 Xmu m)
+  set(LAB_STD_LIBS pthread rt edit curses nsl glut GL GLU X11 Xmu m std++)
 
 endif()
 
