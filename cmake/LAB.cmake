@@ -64,7 +64,7 @@ if ($ENV{MACHTYPE} STREQUAL "x86_64mac")
 
   message("Detected MACHTYPE=x86_64mac")
   include_directories(BEFORE /opt/local/include /opt/X11/include /usr/include)
-  link_directories(/opt/local/lib /opt/X11/lib /usr/lib ${CMAKE_LIBRARY_PATH})
+  link_directories(/opt/X11/lib /opt/local/lib /usr/lib ${CMAKE_LIBRARY_PATH})
   set(LAB_STD_LIBS edit curses glut GL GLU X11 m)
 
 # check for problematic compiler flags
