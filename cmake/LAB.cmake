@@ -111,6 +111,7 @@ set(PHANTOM_HOST braque)
 set(SARCOS_MASTER_HOST xenomai)
 set(SARCOS_SLAVE_HOST xenomai)
 set(SARCOS_PRIMUS_HOST xenomai)
+set(PANDA_HOST xenomai)
 
 #############################################################################
 # print out all variables that we care about
