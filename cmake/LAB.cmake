@@ -91,7 +91,7 @@ else ($ENV{MACHTYPE} STREQUAL "x86_64")
 
   message("Detected MACHTYPE=x86_64")
   include_directories()
-  link_directories(/usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
+  link_directories(/usr/local/lib /usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
   set(LAB_STD_LIBS pthread rt edit curses nsl glut GL GLU X11 Xmu m stdc++)
 
 endif()
