@@ -20,6 +20,7 @@ cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_C_COMPILER gcc)
 set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_CXX_STANDARD 14)
 
 #############################################################################
 # which lab are we compiling for
