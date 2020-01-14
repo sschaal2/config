@@ -112,6 +112,7 @@ set(SARCOS_MASTER_HOST xenomai)
 set(SARCOS_SLAVE_HOST xenomai)
 set(SARCOS_PRIMUS_HOST xenomai)
 set(PANDA_HOST xenomai)
+set(IIWA14_HOST pechstein)
 
 #############################################################################
 # print out all variables that we care about
