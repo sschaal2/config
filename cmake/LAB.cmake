@@ -20,6 +20,7 @@ cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_C_COMPILER gcc)
 set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_CXX_STANDARD 14)
 
 #############################################################################
 # which lab are we compiling for
@@ -91,7 +92,7 @@ else ($ENV{MACHTYPE} STREQUAL "x86_64")
 
   message("Detected MACHTYPE=x86_64")
   include_directories()
-  link_directories(/usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
+  link_directories(/usr/local/lib /usr/X11/lib64 /usr/X11/lib /usr/lib64 ${CMAKE_LIBRARY_PATH})
   set(LAB_STD_LIBS pthread rt edit curses nsl glut GL GLU X11 Xmu m stdc++)
 
 endif()
@@ -111,7 +112,7 @@ set(PHANTOM_HOST braque)
 set(SARCOS_MASTER_HOST xenomai)
 set(SARCOS_SLAVE_HOST xenomai)
 set(SARCOS_PRIMUS_HOST xenomai)
-set(PANDA_HOST xenomai)
+set(PANDA_HOST bamboo)
 set(IIWA14_HOST pechstein)
 
 #############################################################################
