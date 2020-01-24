@@ -1,1 +1,12 @@
-import ~/prog/g3/SL/config/bazel/bazelrc
+# bazel configuration for CLMC and AMD bazel build
+
+# generic build options
+build --copt="-O3" --copt="-DUNIX" --copt="-Wall" --copt="-Wno-unused" --copt="-Wno-strict-aliasing" --copt="-Wno-deprecated-declarations" 
+
+
+
+# compiler option
+build:google3  --copt="-Dx86_64" --copt="-Wno-vla" --copt="-Wno-return-type-c-linkage" 
+build:linux  --copt="-Dx86_64" --copt="-Wno-vla" --copt="-Wno-return-type-c-linkage"
+build:macos  --copt="-Dx86_64mac" --linkopt="-ledit" --linkopt="-L/opt/local/lib" --linkopt="-lcurses" --linkopt="-L/opt/X11/lib" --linkopt="-lglut" --linkopt="-lGL" --linkopt="-lGLU" --linkopt="-lX11" --linkopt="-lm"
+build:xeno  
