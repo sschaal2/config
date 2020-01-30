@@ -6,7 +6,7 @@ build --copt="-O3" --copt="-DUNIX" --copt="-Wall" --copt="-Wno-unused" --copt="-
 
 
 # compiler option
-build:google3  --config="grte_v5"   --define MACHTYPE=x86_64    --copt="-Dx86_64"  --copt="-Wno-vla" --copt="-Wno-return-type-c-linkage" 
+build:google3  --config="grte_v5"   --define MACHTYPE=x86_64    --copt="-Dx86_64"  --copt="-Wno-vla" --copt="-Wno-return-type-c-linkage" --copt="-Wno-tautological-undefined-compare" --copt="-Wno-misleading-indentation"
 build:linux    --copt="-Dx86_64"    --define MACHTYPE=x86_64    --copt="-Wno-vla"  --copt="-Wno-return-type-c-linkage"
 build:macos    --copt="-Dx86_64mac" --define MACHTYPE=x86_64mac --linkopt="-ledit" --linkopt="-L/opt/local/lib" --linkopt="-lcurses" --linkopt="-L/opt/X11/lib" --linkopt="-lglut" --linkopt="-lGL" --linkopt="-lGLU" --linkopt="-lX11" --linkopt="-lm"
 build:xeno  
