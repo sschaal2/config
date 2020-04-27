@@ -1,1 +1,1 @@
-This config directory contains various configuration files for SL, CMAKE, IMAKE, and Bazel. Note that currently only cmake and bazel are continued to be supported.
+This config directory contains various configuration files for SL, CMAKE, IMAKE, and Bazel. Note that currently only cmake and bazel are continued to be supported .
