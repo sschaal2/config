@@ -67,7 +67,6 @@ if ( `uname -a | grep -c ipipe` && `echo $MACHTYPE | grep -cv xeno` > 0 ) then \
    setenv MACHTYPE $MACHTYPE"xeno" \
 endif \
 \
-alias imake           "imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE" \
 set path=(./$MACHTYPE $PROG_ROOT/bin/$MACHTYPE $LAB_ROOT/bin/$MACHTYPE . $path) \
 ' >> SL-CONFIG
 
@@ -93,8 +92,6 @@ then \
     export MACHTYPE="$MACHTYPE"xeno \
 fi \
 \
-alias imake='\''imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE'\'' \
-alias sl_make='\''imake; cd src; imake; cd ..; make -s -j clean; make -s -j all; make -s -j install'\'' \
 export PATH=./$MACHTYPE:$PROG_ROOT/bin/$MACHTYPE:$LAB_ROOT/bin/$MACHTYPE:.:$PATH \
 ' >> SL-CONFIG.sh
 
@@ -115,11 +112,6 @@ export PATH=./$MACHTYPE:$PROG_ROOT/bin/$MACHTYPE:$LAB_ROOT/bin/$MACHTYPE:.:$PATH
     echo "*************************************************************************"
 
 else 
-
-   imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE
-   cd src
-   imake -I$LAB_ROOT/config -TLAB_Imake.tmpl -D$MACHTYPE
-   cd ..
 
    make -s -j clean
    make -s -j install
